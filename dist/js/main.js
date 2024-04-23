@@ -16,7 +16,27 @@
   \******************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_timer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/timer */ \"./modules/timer.js\");\n\r\n\r\n(0,_modules_timer__WEBPACK_IMPORTED_MODULE_0__[\"default\"])('24 april 2024');\n\n//# sourceURL=webpack:///./index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_timer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/timer */ \"./modules/timer.js\");\n/* harmony import */ var _modules_menu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/menu */ \"./modules/menu.js\");\n/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/modal */ \"./modules/modal.js\");\n\r\n\r\n\r\n\r\n(0,_modules_timer__WEBPACK_IMPORTED_MODULE_0__[\"default\"])('25 april 2024');\r\n(0,_modules_menu__WEBPACK_IMPORTED_MODULE_1__[\"default\"])('active-menu');\r\n(0,_modules_modal__WEBPACK_IMPORTED_MODULE_2__[\"default\"])();\n\n//# sourceURL=webpack:///./index.js?");
+
+/***/ }),
+
+/***/ "./modules/menu.js":
+/*!*************************!*\
+  !*** ./modules/menu.js ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst menu = (activeClass)=>{\r\n\tconst menuBtn = document.querySelector('.menu');\r\n\tconst menu = document.querySelector('menu');\r\n\tconst closeBtn = menu.querySelector('.close-btn');\r\n\tconst menuItems = menu.querySelectorAll('ul>li>a');\r\n\tconst linkDown = document.querySelector('a[href=\"#service-block\"]');\r\n\r\n\tconst handleMenu = ()=>{\r\n\t\tmenu.classList.toggle(activeClass);\r\n\t}\r\n\r\n\tconst smoothMenu = () =>{\r\n\t\tmenuItems.forEach(e=>{\r\n\t\t\te.addEventListener('click', (event)=>{\r\n\t\t\t\tsmoothScroll(e)\r\n\t\t\t})\r\n\t\t})\r\n\t}\r\n\tconst linkSmooth = () => {\r\n\t\tlinkDown.addEventListener('click', (event)=>{\r\n\t\t\tsmoothScroll(linkDown)\r\n\t\t})\r\n\t}\r\n\tconst smoothScroll = (elem) =>{\r\n\t\t\tevent.preventDefault();\r\n\t\t\tconst blockID = elem.getAttribute('href').substr(1)\r\n\r\n\t\t\tdocument.getElementById(blockID).scrollIntoView({\r\n\t\t\t\tbehavior: 'smooth',\r\n\t\t\t\tblock: 'start'\r\n\t\t\t})\r\n\t}\r\n\t\r\n\tlinkSmooth()\r\n\tsmoothMenu()\r\n\tmenuBtn.addEventListener('click', handleMenu);\r\n\tcloseBtn.addEventListener('click', handleMenu);\r\n\r\n\tmenuItems.forEach(e => e.addEventListener('click', handleMenu));\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (menu);\n\n//# sourceURL=webpack:///./modules/menu.js?");
+
+/***/ }),
+
+/***/ "./modules/modal.js":
+/*!**************************!*\
+  !*** ./modules/modal.js ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst modal = () => {\r\n\tconst buttons = document.querySelectorAll('.popup-btn');\r\n\tconst modal = document.querySelector('.popup');\r\n\tconst closeBtn = modal.querySelector('.popup-close');\r\n\tconst windowInnerWidth = window.innerWidth;\r\n\r\n\tlet count = 0;\r\n\tlet idInterval;\r\n\tmodal.style.opacity = 0\r\n\r\n \tconst smoothModal = () =>{\r\n\t\tcount += 0.1;\r\n\t\tidInterval = requestAnimationFrame(smoothModal);\r\n\t\t\r\n\t\tif (count < 1){\r\n\t\t\tmodal.style.opacity = count\r\n\t\t} else{\r\n\t\t\tcancelAnimationFrame(idInterval)\r\n\t\t}\r\n\t}\r\n\r\n\tbuttons.forEach(e => {\r\n\t\te.addEventListener('click', ()=>{\r\n\t\t\tif(windowInnerWidth > 768){\r\n\t\t\t\tmodal.style.display = 'block';\r\n\t\t\t\tsmoothModal()\r\n\t\t\t} else {\r\n\t\t\t\tmodal.style.opacity = ''\r\n\t\t\t\tmodal.style.display = 'block';\r\n\t\t\t}\r\n\t\t})\r\n\t})\r\n\r\n\tcloseBtn.addEventListener('click', ()=>{\r\n\t\tif(windowInnerWidth > 768){\r\n\t\t\tmodal.style.display = 'none';\r\n\t \t\tmodal.style.opacity = 0;\r\n\t\t\tcount = 0;\r\n\t\t} else {\r\n\t\t\tmodal.style.display = 'none';\r\n\t\t}\r\n\t})\r\n\r\n\t\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (modal);\n\n//# sourceURL=webpack:///./modules/modal.js?");
 
 /***/ }),
 

@@ -1,3 +1,7 @@
 import timer from './modules/timer'
+import menu from './modules/menu'
+import modal from './modules/modal'
 
-timer('24 april 2024');
+timer('25 april 2024');
+menu('active-menu');
+modal();
