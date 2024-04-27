@@ -15,24 +15,22 @@ const menu = (activeClass)=>{
 		})
 }
 
-	document.addEventListener('click', e => {
-		if(e.target.closest('.menu') || !e.target.closest('menu') && menu.classList.contains(activeClass)){
-			handleMenu();
-		}else if(e.target.closest('main>a[href="#service-block"]')){
-			let linkDown = e.target.closest('main>a[href="#service-block"]')
-			smoothScroll(linkDown)
-		}
-	})
-
-	menu.addEventListener('click', e => {
-		if(e.target.matches('menu>ul>li>a')){
+	const toggleMenu = () => {
+		document.addEventListener('click', e => {
+			if(e.target.closest('.menu') || !e.target.closest('menu') && menu.classList.contains(activeClass)){
+				handleMenu();
+			}else if(e.target.closest('main>a[href="#service-block"]')){
+				let linkDown = e.target.closest('main>a[href="#service-block"]')
+				smoothScroll(linkDown)
+			} else if(e.target.matches('menu>ul>li>a')){
 				smoothScroll(e.target)
 				handleMenu();
-		} else if(e.target.classList.contains('close-btn')){
-			handleMenu();
-		}
-	})
-
+			}	else if(e.target.classList.contains('close-btn')){
+				handleMenu();
+			}
+		})
+	}
+	toggleMenu()
 }
 
 export default menu
