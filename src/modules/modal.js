@@ -1,3 +1,5 @@
+import { animate } from "./helpers";
+
 const modal = () => {
 	const buttons = document.querySelectorAll('.popup-btn');
 	const modal = document.querySelector('.popup');
