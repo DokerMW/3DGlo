@@ -30,6 +30,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./modules/helpers.js":
+/*!****************************!*\
+  !*** ./modules/helpers.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   animate: () => (/* binding */ animate)\n/* harmony export */ });\nconst animate = ({timing, draw, duration}) => {\r\n\tlet start = performance.now();\r\n\r\n\trequestAnimationFrame(function animate(time) {\r\n\t\tlet timeFraction = (time - start) / duration;\r\n\t\tif (timeFraction > 1) timeFraction = 1;\r\n\r\n\t\tlet progress = timing(timeFraction);\r\n\r\n\t\tdraw(progress);\r\n\r\n\t\tif(timeFraction < 1) requestAnimationFrame(animate)\r\n\t});\r\n}\r\n\r\n\n\n//# sourceURL=webpack:///./modules/helpers.js?");
+
+/***/ }),
+
 /***/ "./modules/menu.js":
 /*!*************************!*\
   !*** ./modules/menu.js ***!
@@ -46,7 +56,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst modal = () => {\r\n\tconst buttons = document.querySelectorAll('.popup-btn');\r\n\tconst modal = document.querySelector('.popup');\r\n\tconst windowInnerWidth = window.innerWidth;\r\n\r\n\tlet count = 0;\r\n\tlet idInterval;\r\n\tmodal.style.opacity = 0\r\n\r\n \tconst smoothModal = () =>{\r\n\t\tcount += 0.1;\r\n\t\tidInterval = requestAnimationFrame(smoothModal);\r\n\t\t\r\n\t\tif (count < 1){\r\n\t\t\tmodal.style.opacity = count\r\n\t\t} else{\r\n\t\t\tcancelAnimationFrame(idInterval)\r\n\t\t}\r\n\t}\r\n\r\n\tbuttons.forEach(e => {\r\n\t\te.addEventListener('click', ()=>{\r\n\t\t\tif(windowInnerWidth > 768){\r\n\t\t\t\tmodal.style.display = 'block';\r\n\t\t\t\tsmoothModal()\r\n\t\t\t} else {\r\n\t\t\t\tmodal.style.opacity = ''\r\n\t\t\t\tmodal.style.display = 'block';\r\n\t\t\t}\r\n\t\t})\r\n\t})\r\n\r\n\tmodal.addEventListener('click', e=>{\r\n\t\tif(!e.target.closest('.popup-content') || e.target.classList.contains('popup-close')){\r\n\t\t\tif(windowInnerWidth > 768){\r\n\t\t\t\tmodal.style.display = 'none';\r\n\t\t\t\t modal.style.opacity = 0;\r\n\t\t\t\tcount = 0;\r\n\t\t\t} else {\r\n\t\t\t\tmodal.style.display = 'none';\r\n\t\t\t}\r\n\t\t}\r\n\t})\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (modal);\n\n//# sourceURL=webpack:///./modules/modal.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers */ \"./modules/helpers.js\");\n\r\n\r\nconst modal = () => {\r\n\tconst buttons = document.querySelectorAll('.popup-btn');\r\n\tconst modal = document.querySelector('.popup');\r\n\tconst windowInnerWidth = window.innerWidth;\r\n\r\n\tbuttons.forEach(e => {\r\n\t\te.addEventListener('click', ()=>{\r\n\t\t\tif(windowInnerWidth > 768){\r\n\t\t\t\tmodal.style.display = 'block';\r\n\t\t\t\t(0,_helpers__WEBPACK_IMPORTED_MODULE_0__.animate)({\r\n\t\t\t\t\tduration: 200,\r\n\t\t\t\t\ttiming(timeFraction) {\r\n\t\t\t\t\t\treturn timeFraction;\r\n\t\t\t\t\t},\r\n\t\t\t\t\tdraw(progress){\r\n\t\t\t\t\t\tmodal.style.opacity = progress\r\n\t\t\t\t\t}\r\n\t\t\t\t})\r\n\t\t\t} else {\r\n\t\t\t\tmodal.style.display = 'block';\r\n\t\t\t}\r\n\t\t})\r\n\t})\r\n\r\n\tmodal.addEventListener('click', e=>{\r\n\t\tif(!e.target.closest('.popup-content') || e.target.classList.contains('popup-close')){\r\n\t\t\t\tmodal.style.display = 'none';\r\n\t\t}\r\n\t})\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (modal);\n\n//# sourceURL=webpack:///./modules/modal.js?");
 
 /***/ }),
 
