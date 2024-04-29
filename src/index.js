@@ -8,7 +8,8 @@ timer('06 may 2024');
 menu('active-menu');
 modal();
 tabs();
-slider('portfolio-content',
+slider(
+			'portfolio-content',
 			'portfolio-item',
 			'portfolio-item-active',
 			'portfolio-dots',

@@ -1,12 +1,41 @@
-const slider = (sliderContainer,slideItem,activeSlide,dotContainer, dotsClass, dotsActiveClass,sliderBtns,arrowLeftId,arrowRightId) =>{
+const slider = (sliderContainer,slideItem,activeSlide = 'slide-active',dotContainer, dotsClass, dotsActiveClass = 'dot-active',sliderBtns,arrowLeftId,arrowRightId) =>{
 	const sliderBlock = document.querySelector(`.${sliderContainer}`);
 	const slides = document.querySelectorAll(`.${slideItem}`);
+	const slide = document.querySelector(`.${slideItem}`);
 	const dotsContainer = document.querySelector(`.${dotContainer}`);
 	const timeInterval = 2000;
-	
+	const classData = [
+		sliderContainer,
+		slideItem,
+		activeSlide,
+		dotContainer, 
+		dotsClass, 
+		dotsActiveClass,
+		sliderBtns,
+		arrowLeftId,
+		arrowRightId
+	]
+
+	let wrongClass = false;
 	let currentSlide = 0;
 	let dots;
 	let interval;
+
+
+	if (!document.querySelector(`.${classData[0]}`) ||
+	 !document.querySelector(`.${classData[1]}`)) {
+		wrongClass = true;
+	} 
+	if(wrongClass){
+		return
+	}
+	if(!document.querySelector(`.${classData[1]}`).closest(`.${classData[0]}`)){
+		wrongClass = true;
+	}
+
+	if(wrongClass){
+		return
+	}
 
 	const prevSlide = (elems, index, strClass) => {
 		elems[index].classList.remove(strClass);
@@ -43,6 +72,7 @@ const slider = (sliderContainer,slideItem,activeSlide,dotContainer, dotsClass, d
 	const stopSlide = () => {
 		clearInterval(interval)
 	}
+
 
 	sliderBlock.addEventListener('click', e => {
 		e.preventDefault();
@@ -88,6 +118,9 @@ const slider = (sliderContainer,slideItem,activeSlide,dotContainer, dotsClass, d
 	}, true)
 
 	createDots()
+
+	
+
 	startSlide(timeInterval)
 
 }
