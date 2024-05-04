@@ -5,15 +5,8 @@ const sendForm = ({formId, someElement = []}) => {
 	const statusBlock = document.createElement('div')
 	const loader = document.querySelector(`.loader`);
 
-	// const loadText = 'Загрузка...'
-	// const errorText = 'Ошибка!'
-	// const successText = 'Успешно!'
-
-
 	const validate = (list) => {
 		let success = true;
-
-		
 		return success
 	}
 
