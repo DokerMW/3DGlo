@@ -1,9 +1,13 @@
+import preloader from "./preloader";
+
 const sendForm = ({formId, someElement = []}) => {
 	const form = document.getElementById(formId);
 	const statusBlock = document.createElement('div')
-	const loadText = 'Загрузка...'
-	const errorText = 'Ошибка!'
-	const successText = 'Успешно!'
+	const loader = document.querySelector(`.loader`);
+
+	// const loadText = 'Загрузка...'
+	// const errorText = 'Ошибка!'
+	// const successText = 'Успешно!'
 
 
 	const validate = (list) => {
@@ -29,8 +33,7 @@ const sendForm = ({formId, someElement = []}) => {
 		const formData = new FormData(form)
 		const formBody = {}
 
-		statusBlock.textContent = loadText;
-		form.append(statusBlock)
+		preloader('preloader', 'active')
 
 		formData.forEach((key, val) => {
 			formBody[key] = val
@@ -49,13 +52,20 @@ const sendForm = ({formId, someElement = []}) => {
 		if(validate(formElements)){
 			sendData(formBody)
 			.then(data => {
-				statusBlock.textContent = successText
+				loader.classList.add('success')
+				setTimeout(() => {
+					document.querySelector('.preloader').classList.remove('active')
+				},1000)
+				
 				formElements.forEach(input => {
 					input.value = ''
 				})
 			})
 			.catch(error => {
-				statusBlock.textContent = errorText
+				loader.classList.add('error')
+				setTimeout(() => {
+					document.querySelector('.preloader').classList.remove('active')
+				},1000)
 			})
 		} else {
 			alert('Данные не валидны!')

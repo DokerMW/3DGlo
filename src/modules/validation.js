@@ -9,13 +9,28 @@ const validation = () => {
 			event.target.value = event.target.value.replace(/\-{2,}/, "-").trim()
 			if(e.classList.contains('calc-item')){
 				event.target.value = event.target.value.replace(/\D+/, "")
-			} else if(e.getAttribute('type') === 'text' || e.classList.contains('mess') && !e.classList.contains('calc-item')) {
-				event.target.value = event.target.value.replace(/[^а-яА-Я\-\s]/g, "")
-				event.target.value = event.target.value.split(' ').map(el => el[0].toUpperCase() + el.substr(1).toLowerCase()).join(' ');
-			} else if (e.getAttribute('type') === 'email'){
+			} 
+			if(e.getAttribute('type') === 'text' && !e.classList.contains('calc-item')) {
+				try{
+					event.target.value = event.target.value.replace(/[^а-яА-Я\-\s]/g, "")
+					event.target.value = event.target.value.split(' ').map(el => el[0].toUpperCase() + el.substr(1).toLowerCase()).join(' ');
+				} catch(error) {
+					console.log(error.message);
+				}
+			} 
+			if(e.classList.contains('mess') && !e.classList.contains('calc-item')) {
+				try{
+					event.target.value = event.target.value.replace(/[^а-яА-Я\-\s\.\,\!\?]/g, "")
+					event.target.value = event.target.value.split(' ').map(el => el[0].toUpperCase() + el.substr(1).toLowerCase()).join(' ');
+				} catch(error) {
+					console.log(error.message);
+				}
+			} 
+			if (e.getAttribute('type') === 'email'){
 				event.target.value = event.target.value.replace(/[^a-zA-Z0-9\-\.\!\~\*\'\@]+/g, "")
-			} else if (e.getAttribute('type') === 'tel'){
-				event.target.value = event.target.value.replace(/[^\d\(\)\-]+/, "")
+			} 
+			if (e.getAttribute('type') === 'tel'){
+				event.target.value = event.target.value.replace(/[^\d\(\)\-\+]+/, "")
 			}
 		})
 	})
