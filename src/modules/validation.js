@@ -1,7 +1,9 @@
 const validation = () => {
 	const allInputs = document.querySelectorAll('input');
 	const forms = document.querySelectorAll('form[id^="form"]');
-	const testEmail = /[a-zA-Z0-9\-\.\!\~\*\']+@[a-zA-Z]+\.[a-zA-Z]+/g;
+	const testEmail = /[a-zA-Z0-9\-\.\!\~\*\']+@[a-zA-Z]+\.[a-zA-Z]+/;
+	const testPhone = /^\+?[0-9][-\(]?\d{3}\)?-?\d{3}-?\d{2}-?\d{2}$/;
+	
 	
 	allInputs.forEach(e => {
 		e.addEventListener('blur', event => {
@@ -36,13 +38,22 @@ const validation = () => {
 	})
 
 	forms.forEach(e => {
+	let allInputs = document.querySelectorAll('input');		
 		e.addEventListener('submit', event => {
+			allInputs.forEach(e => {
+				if(e.classList.contains('success')){
+					e.classList.remove('success')
+				}
+			})
+			let targetInputs = event.target.querySelectorAll('input');
 			let inputEmail = event.target.querySelector('input[type="email"]');
-			if(testEmail.test(inputEmail.value)){
-				console.log('Данные отправлены');
+			let inputTel = event.target.querySelector('input[type="tel"]');
+			if(testEmail.test(inputEmail.value) && testPhone.test(inputTel.value)){
+				targetInputs.forEach(e =>{
+					e.classList.add('success')
+				})
 			} else{
 				event.preventDefault();
-				alert('Не правильно введен email')
 			}
 		});
 	})

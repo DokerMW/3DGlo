@@ -52,6 +52,7 @@ const slider = (sliderContainer,slideItem,activeSlide = 'slide-active',dotContai
 			count++
 		}
 		dots = document.querySelectorAll(`.${dotsClass}`);
+		dots[0].classList.add(dotsActiveClass)
 	}
 
 	const autoSlide = () => {
@@ -117,10 +118,8 @@ const slider = (sliderContainer,slideItem,activeSlide = 'slide-active',dotContai
 		}
 	}, true)
 
-	createDots()
-
 	
-
+	createDots()
 	startSlide(timeInterval)
 
 }

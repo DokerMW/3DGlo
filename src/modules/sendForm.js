@@ -7,6 +7,13 @@ const sendForm = ({formId, someElement = []}) => {
 
 	const validate = (list) => {
 		let success = true;
+
+		list.forEach(input => {
+			
+			if(!input.classList.contains('success')){
+				success = false;
+			}
+		})
 		return success
 	}
 
@@ -26,7 +33,6 @@ const sendForm = ({formId, someElement = []}) => {
 		const formData = new FormData(form)
 		const formBody = {}
 
-		preloader('preloader', 'active')
 
 		formData.forEach((key, val) => {
 			formBody[key] = val
@@ -43,9 +49,13 @@ const sendForm = ({formId, someElement = []}) => {
 		})
 
 		if(validate(formElements)){
+		preloader('preloader', 'active')
+
 			sendData(formBody)
 			.then(data => {
 				loader.classList.add('success')
+				console.log(data);
+				
 				setTimeout(() => {
 					document.querySelector('.preloader').classList.remove('active')
 				},1000)
